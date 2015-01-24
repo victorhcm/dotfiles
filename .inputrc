@@ -1,0 +1,23 @@
+# search history pressing Up/Down --- such as MATLAB
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# After using commands such as ($ ls !*), if you press a space after !*, it will
+# resolve it for you. ($ ls !* ) = ($ ls files.txt)
+$if Bash
+	Space: magic-space
+$endif
+
+# Insert-Option Macro
+# Meta+O can be made to load the previous command and position the cursor for typing an option
+# Defined in .inputrc:
+"\M-o": "\C-p\C-a\M-f "
+
+# Completion, no hidden files
+set match-hidden-files off
+
+# complete things that have been typed in the wrong case:
+set completion-ignore-case on
+
+# when listing possibile file completions, put / after directory names and * after programs:
+set visible-stats on
