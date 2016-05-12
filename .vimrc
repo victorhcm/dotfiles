@@ -70,5 +70,4 @@ cnoremap <C-g>  <C-c>
 set showmatch      " Show matching brackets.
 set mouse=a        " Enable mouse usage (all modes)
 
-"let g:Powerline_symbols = 'fancy'
 
