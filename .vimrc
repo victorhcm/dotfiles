@@ -1,11 +1,38 @@
 "======================================================================
+" Vundle
+" http://www.mybridge.co/view/10709
+" http://lepture.com/en/2012/vundle-vs-pathogen
+" http://tilvim.com/2013/12/28/pathogen-for-vundle.html
+"======================================================================
+set nocompatible " required
+filetype off     " required
+
+" -----------------------------------------------
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle
+" required! 
+Plugin 'VundleVim/Vundle.vim'
+
+" my bundles
+Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'airblade/vim-gitgutter'
+Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'ctrlpvim/ctrlp.vim'
+
+call vundle#end()
+" -----------------------------------------------
+
+filetype plugin indent on " required
+
+"======================================================================
 " Coming Home to Vim
 " http://stevelosh.com/blog/2010/09/coming-home-to-vim/
 "======================================================================
-filetype off
-filetype plugin indent on
-
-set nocompatible
 
 set modelines=0
 
@@ -28,13 +55,14 @@ set ttyfast
 set ruler
 set backspace=indent,eol,start
 set laststatus=2
+"set number
 set relativenumber
 set undofile
 
 "======================================================================
 " Pathogen
 "======================================================================
-execute pathogen#infect()
+"execute pathogen#infect()
 
 
 "======================================================================
@@ -61,6 +89,15 @@ cnoremap <Esc>b <S-Left>
 cnoremap <Esc>f <S-Right>
 cnoremap <Esc>d <S-right><Delete>
 cnoremap <C-g>  <C-c>
+nnoremap <F4>   :Te <C-r><C-f><CR>
+
+
+"======================================================================
+" VIM and Python - A Match from Heaven
+" http://www.mybridge.co/view/10709
+"======================================================================
+set foldmethod=indent
+set foldlevel=99
 
 "======================================================================
 " Vim functions
@@ -70,4 +107,19 @@ cnoremap <C-g>  <C-c>
 set showmatch      " Show matching brackets.
 set mouse=a        " Enable mouse usage (all modes)
 
+let g:Powerline_symbols = 'fancy'
+" Color
+set t_Co=256
+
+"======================================================================
+" Syntastic config
+"======================================================================
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
