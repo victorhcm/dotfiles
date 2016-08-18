@@ -17,13 +17,25 @@ Plugin 'VundleVim/Vundle.vim'
 
 " my bundles
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+"Plugin 'vim-airline/vim-airline'  "alternative completely in vimscript for powerline
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'ctrlpvim/ctrlp.vim'
-
+" new plugins --
+Plugin 'klen/python-mode'        " great extension
+Plugin 'elzr/vim-json'           " better json
+Plugin 'justinmk/vim-sneak'      " extended f. use s<char><char>
+Plugin 'majutsushi/tagbar'       " show tagbar :TagbarToggle
+Plugin 'godlygeek/tabular'       " aligning text
+Plugin 'plasticboy/vim-markdown' " must come after tabular
+Plugin 'tpope/vim-sleuth'        " automatically adjusts 'shiftwidth' and 'expandtab' based on current file
+Plugin 'vim-scripts/a.vim'       " alternate between .c/.h
+Plugin 'flazz/vim-colorschemes'  " the name says it all
+"Plugin 'sjl/gundo.vim'          " visualize the undo tree
+"most new plugins came from https://github.com/VundleVim/Vundle.vim
 call vundle#end()
 " -----------------------------------------------
 
@@ -89,7 +101,15 @@ cnoremap <Esc>b <S-Left>
 cnoremap <Esc>f <S-Right>
 cnoremap <Esc>d <S-right><Delete>
 cnoremap <C-g>  <C-c>
-nnoremap <F4>   :Te <C-r><C-f><CR>
+
+map <C-n> :NERDTreeTabsToggle<CR>
+"close if nerd is the only win remaining
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"autoload nerd tree if no args to vim
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"nnoremap <F4>   :Te <C-r><C-f><CR> "gf already works! but it's a cool
+"shortcut
 
 
 "======================================================================
@@ -114,12 +134,26 @@ set t_Co=256
 "======================================================================
 " Syntastic config
 "======================================================================
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+"======================================================================
+" Change cursor in different modes
+" http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes
+"======================================================================
+if has("autocmd")
+  au VimEnter,InsertLeave * silent execute '!echo -ne "\e[2 q"' | redraw!
+  au InsertEnter,InsertChange *
+    \ if v:insertmode == 'i' | 
+    \   silent execute '!echo -ne "\e[6 q"' | redraw! |
+    \ elseif v:insertmode == 'r' |
+    \   silent execute '!echo -ne "\e[4 q"' | redraw! |
+    \ endif
+  au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+endif
