@@ -34,6 +34,9 @@ Plugin 'plasticboy/vim-markdown' " must come after tabular
 Plugin 'tpope/vim-sleuth'        " automatically adjusts 'shiftwidth' and 'expandtab' based on current file
 Plugin 'vim-scripts/a.vim'       " alternate between .c/.h
 Plugin 'flazz/vim-colorschemes'  " the name says it all
+Plugin 'tpope/vim-surround'      " change surrounding cs'<q>
+Plugin 'jiangmiao/auto-pairs'    " autocloses brackets etc.
+"Plugin 'tomasr/molokai'         " better molokai
 "Plugin 'sjl/gundo.vim'          " visualize the undo tree
 "most new plugins came from https://github.com/VundleVim/Vundle.vim
 call vundle#end()
