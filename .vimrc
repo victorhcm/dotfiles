@@ -163,3 +163,53 @@ if has("autocmd")
     \ endif
   au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
 endif
+
+" custom changes 
+set background=dark
+colorscheme molokai
+
+"======================================================================
+" Vim Anti-patterns
+" About mixing vim sloppiness with precision https://news.ycombinator.com/item?id=12645523 
+" > I never got into the habit of using { and  }. I just use H M L
+" > (high/medium/low) to get approximately in the right part of the screen, then
+" > go line-by-line. You can also do 5H or 10L to get "5 lines from the top" or
+" > "10 lines from the bottom". I make pretty good use of vim features, but I
+" > like to mix some sloppiness with the precision. I don't often count things
+" > before typing commands, because that breaks the second-nature quality of
+" > navigation. If something is more than 2 or 3 objects away, I approximate. I
+" > do use counting with t, T, f, and F a lot to hop around, including things
+" > like c2f). Very frequently that combines well with spamming j.j.j.j.j. I use
+" > . with trivial movement (like j or n) at least 10x more than @a. Another way
+" > to move fast sloppily is W and B. I guess I'm saying: learn all the cool
+" > stuff you can do, but don't feel like you have to find the most precise way
+" > to do every little thing. If you're just starting out, relax and don't try
+" > too hard. You can always just pick one new thing every couple weeks and try
+" > to add it to your habits.
+"
+" > Oh also: he mentions O to insert above the current line. I use that a lot,
+" > but on my systems (going back 15 years or so I think) it has always required
+" > a pause, like vim is waiting to see if I'm typing O or some longer command.
+" > If I type O and immediately start entering text, strange things happen. This
+" > doesn't happen with o. Does anyone else experience this? Maybe it's just
+" > something weird in my own setup.
+"
+" > EDIT: Some more "moving fast sloppily": 1G goes to the top of the file. G
+" > goes to the bottom. Also you can not-move, but scroll the visible area so
+" > that your cursor is on the top line (zENTER), middle line (z.), or bottom
+" > line (z-). I use that a lot when I am Ctrl-Fing through a file, so I can see
+" > more context.
+"======================================================================
+" for scrolling up and down quickly
+" https://news.ycombinator.com/item?id=12645960
+" if you need to use J (join), use :join instead. Motion is used more often
+"""nnoremap J 7j  
+"""nnoremap K 7k
+"""vnoremap J 7j
+"""vnoremap K 7k
+" J to :[j]oin is my muscle memory already
+nnoremap <PageDown> 7j
+nnoremap <PageUp> 7k
+vnoremap <PageDown> 7j
+vnoremap <PageUp> 7k
+
