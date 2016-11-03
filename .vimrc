@@ -37,10 +37,12 @@ Plugin 'flazz/vim-colorschemes'  " the name says it all
 Plugin 'tpope/vim-surround'      " change surrounding cs'<q>
 Plugin 'Raimondi/delimitMate'    " same autoclose, but without auto-pairs issue
 "Plugin 'jiangmiao/auto-pairs'    " autocloses brackets etc.
-Plugin 'ryanoasis/vim-devicons'  " icons on NERDTree etc.
 "Plugin 'tomasr/molokai'         " better molokai
 "Plugin 'sjl/gundo.vim'          " visualize the undo tree
+Plugin 'ryanoasis/vim-devicons'  " icons on NERDTree etc.
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight' " icon colors
 "most new plugins came from https://github.com/VundleVim/Vundle.vim
+" source: https://github.com/mhartington/dotfiles/blob/master/vimrc
 call vundle#end()
 " -----------------------------------------------
 
@@ -110,6 +112,10 @@ cnoremap <C-g>  <C-c>
 map <C-n> :NERDTreeTabsToggle<CR>
 "close if nerd is the only win remaining
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+
 "autoload nerd tree if no args to vim
 "autocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
