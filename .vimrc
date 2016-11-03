@@ -113,6 +113,7 @@ map <C-n> :NERDTreeTabsToggle<CR>
 "close if nerd is the only win remaining
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+let g:NERDTreeMouseMode = 3
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 
