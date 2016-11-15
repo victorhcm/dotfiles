@@ -224,3 +224,13 @@ nnoremap <PageUp> 7k
 vnoremap <PageDown> 7j
 vnoremap <PageUp> 7k
 
+" Mimic Emacs Line Editing in Insert Mode Only
+" http://stackoverflow.com/a/27878200/957997
+inoremap <C-A> <Home>
+inoremap <C-B> <Left>
+inoremap <C-E> <End>
+inoremap <C-F> <Right>
+inoremap <C-K> <Esc>lDa
+inoremap <C-U> <Esc>d0xi
+inoremap <C-Y> <Esc>pa
+inoremap <C-X><C-S> <Esc>:w<CR>a
