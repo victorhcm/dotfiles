@@ -165,13 +165,18 @@ set background=dark
 nnoremap gb :ls<CR>:b  
 
 
-"tab walking (from @guimaluf)
-nmap <left>  :tabprev<CR>
-nmap <right> :tabnext<CR>
+" look for tags in upper directories
+" http://stackoverflow.com/a/741486/957997
+set tags=./tags;/
 
-"buffer walking
-nmap <up>    :bn <CR>zz
-nmap <down> :bp <CR>zz
+
+""tab walking (from @guimaluf)
+"nmap <left>  :tabprev<CR>
+"nmap <right> :tabnext<CR>
+"
+""buffer walking
+"nmap <up>    :bn <CR>zz
+"nmap <down> :bp <CR>zz
 
 
 " Mimic Emacs Line Editing in Insert Mode Only
