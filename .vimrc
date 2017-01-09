@@ -243,8 +243,7 @@ endfunction
 """vnoremap J 7j
 """vnoremap K 7k
 " J to :[j]oin is my muscle memory already
-nnoremap <PageDown> 7j
-nnoremap <PageUp> 7k
-vnoremap <PageDown> 7j
-vnoremap <PageUp> 7k
-
+nnoremap <PageDown> 7<C-E>
+nnoremap <PageUp> 7<C-Y>
+vnoremap <PageDown> 7<C-E>
+vnoremap <PageUp> 7<C-Y>
