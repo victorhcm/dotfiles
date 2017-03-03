@@ -35,6 +35,7 @@ call vundle#begin()
   "Plugin 'sjl/gundo.vim'          " visualize the undo tree
   Plugin 'ryanoasis/vim-devicons'  " icons on NERDTree etc.
   Plugin 'tiagofumo/vim-nerdtree-syntax-highlight' " icon colors
+  Plugin 'jeaye/color_coded'
 call vundle#end()
 "most new plugins came from https://github.com/VundleVim/Vundle.vim
 " source: https://github.com/mhartington/dotfiles/blob/master/vimrc
@@ -121,9 +122,9 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1  " if annoying: 0
-let g:syntastic_auto_loc_list = 1             " 2
-let g:syntastic_check_on_open = 1             " 0
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 2
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
 
@@ -137,6 +138,7 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:NERDTreeMouseMode = 3
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:DevIconsEnableFoldersOpenClose = 1
+let g:NERDTreeHijackNetrw = 0
 
 map <C-n> :NERDTreeTabsToggle<CR>
 "close if nerd is the only win remaining
@@ -150,6 +152,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " pymode: disable window showing lint errors
 let g:pymode_lint_cwindow = 0
+"let g:pymode_rope = 0  " disable for large repos, such as caffe
 
 
 " color theme
@@ -165,7 +168,7 @@ set background=dark
 nnoremap gb :ls<CR>:b  
 
 
-" look for tags in upper directories
+""look for tags in upper directories
 " http://stackoverflow.com/a/741486/957997
 set tags=./tags;/
 
@@ -247,3 +250,4 @@ nnoremap <PageDown> 7<C-E>
 nnoremap <PageUp> 7<C-Y>
 vnoremap <PageDown> 7<C-E>
 vnoremap <PageUp> 7<C-Y>
+
