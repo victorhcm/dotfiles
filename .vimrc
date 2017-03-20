@@ -31,9 +31,11 @@ call vundle#begin()
   Plugin 'flazz/vim-colorschemes'  " the name says it all
   Plugin 'tpope/vim-surround'      " change surrounding cs'<q>
   Plugin 'Raimondi/delimitMate'    " same autoclose, but without auto-pairs issue
-  "Plugin 'jiangmiao/auto-pairs'    " autocloses brackets etc.
+  "Plugin 'jiangmiao/auto-pairs'   " autocloses brackets etc.
   "Plugin 'sjl/gundo.vim'          " visualize the undo tree
   Plugin 'ryanoasis/vim-devicons'  " icons on NERDTree etc.
+  Plugin 'tpope/vim-repeat'        " repeats more stuff with .
+  Plugin 'tpope/vim-obsession'     " better session manager
   Plugin 'tiagofumo/vim-nerdtree-syntax-highlight' " icon colors
   Plugin 'jeaye/color_coded'
 call vundle#end()
@@ -71,6 +73,23 @@ set laststatus=2
 "set number
 set relativenumber
 set undofile
+
+"======================================================================
+" A Good Vimrc
+" https://dougblack.io/words/a-good-vimrc.html
+"======================================================================
+set lazyredraw     " redraw only when need to. makes macros faster
+" highlight last inserted text
+nnoremap gV `[v`]  
+
+" allows cursor change in tmux mode
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
 
 "======================================================================
 " Vim After 11 Years
