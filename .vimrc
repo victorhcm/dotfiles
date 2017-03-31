@@ -17,17 +17,15 @@ call vundle#begin()
   Plugin 'scrooloose/syntastic'
   Plugin 'scrooloose/nerdtree'
   Plugin 'jistr/vim-nerdtree-tabs'
-  Plugin 'Valloric/YouCompleteMe'
+  "Plugin 'Valloric/YouCompleteMe'
   Plugin 'ctrlpvim/ctrlp.vim'
-  " new plugins --
   Plugin 'klen/python-mode'        " great extension
   Plugin 'elzr/vim-json'           " better json
-  Plugin 'justinmk/vim-sneak'      " extended f. use s<char><char>
+  "Plugin 'justinmk/vim-sneak'     " extended f. use s<char><char>
   Plugin 'majutsushi/tagbar'       " show tagbar :TagbarToggle
   Plugin 'godlygeek/tabular'       " aligning text
   Plugin 'plasticboy/vim-markdown' " must come after tabular
   Plugin 'tpope/vim-sleuth'        " automatically adjusts 'shiftwidth' and 'expandtab' based on current file
-  Plugin 'vim-scripts/a.vim'       " alternate between .c/.h
   Plugin 'flazz/vim-colorschemes'  " the name says it all
   Plugin 'tpope/vim-surround'      " change surrounding cs'<q>
   Plugin 'Raimondi/delimitMate'    " same autoclose, but without auto-pairs issue
@@ -35,7 +33,7 @@ call vundle#begin()
   "Plugin 'sjl/gundo.vim'          " visualize the undo tree
   Plugin 'ryanoasis/vim-devicons'  " icons on NERDTree etc.
   Plugin 'tpope/vim-repeat'        " repeats more stuff with .
-  Plugin 'tpope/vim-obsession'     " better session manager
+  "Plugin 'tpope/vim-obsession'    " better session manager
   Plugin 'tiagofumo/vim-nerdtree-syntax-highlight' " icon colors
   Plugin 'jeaye/color_coded'
 call vundle#end()
@@ -79,8 +77,6 @@ set undofile
 " https://dougblack.io/words/a-good-vimrc.html
 "======================================================================
 set lazyredraw     " redraw only when need to. makes macros faster
-" highlight last inserted text
-nnoremap gV `[v`]  
 
 " allows cursor change in tmux mode
 if exists('$TMUX')
@@ -162,11 +158,9 @@ let g:NERDTreeHijackNetrw = 0
 map <C-n> :NERDTreeTabsToggle<CR>
 "close if nerd is the only win remaining
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-"autoload nerd tree if no args to vim
+""autoload nerd tree if no args to vim
 "autocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-"nnoremap <F4>   :Te <C-r><C-f><CR> "gf already works! but it's a cool
-"shortcut
 
 
 " pymode: disable window showing lint errors
@@ -187,21 +181,59 @@ set background=dark
 nnoremap gb :ls<CR>:b  
 
 
+"gf already works! but it's a cool shortcut
+"nnoremap <F4>   :Te <C-r><C-f><CR> 
+
+
 ""look for tags in upper directories
 " http://stackoverflow.com/a/741486/957997
 set tags=./tags;/
+
 
 ""set your path
 "https://github.com/vsbuffalo/dotfiles/blob/master/.vimrc#L40
 set path+=./**,~/workspace/**
 
-""tab walking (from @guimaluf)
-"nmap <left>  :tabprev<CR>
-"nmap <right> :tabnext<CR>
-"
-""buffer walking
-"nmap <up>    :bn <CR>zz
-"nmap <down> :bp <CR>zz
+
+" there are other interesting keybindings here:
+" https://gist.github.com/cyeong/3862602
+if has("cscope")
+    " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
+    set cscopetag
+
+    " check cscope for definition of a symbol before checking ctags: set to 1
+    " if you want the reverse search order.
+    set csto=0
+
+    " add any cscope database in current directory
+    if filereadable("cscope.out")
+        cs add cscope.out  
+    " else add the database pointed to by environment variable 
+    elseif $CSCOPE_DB != ""
+        cs add $CSCOPE_DB
+    endif
+
+    " show msg when any other cscope db added
+	set cscopeverbose 
+endif
+
+" http://stackoverflow.com/a/563992/957997
+" definition in a new tab
+map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+" definition in a vertical split
+map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
+" build ctags and cscope files
+" adapted from http://stackoverflow.com/a/934523/957997
+if has("cscope")
+  map <F4> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q src/ include/ && 
+        \ find . -name '*.py' 
+        \ -o -iname '*.[CH]' 
+        \ -o -name '*.cpp' 
+        \ -o -name '*.cc' 
+        \ -o -name '*.hpp' > cscope.files 
+        \ && cscope -b -q<CR>
+endif
 
 
 " Mimic Emacs Line Editing in Insert Mode Only
@@ -255,6 +287,8 @@ function! VisualSelection(direction) range
   let @/ = l:pattern
   let @" = l:saved_reg
 endfunction
+
+
 
 "======================================================================
 " Vim Anti-patterns
