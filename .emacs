@@ -15,7 +15,6 @@
 ;;======================================================================
 ;;                              Victor Hugo                            |
 ;;======================================================================
-(set-default-font "Consolas 12")
 
 ;; para evitar aquela confirmação que o emacs fica esperando ao
 ;; carregar arquivos abertos anteriormente
@@ -45,24 +44,54 @@
 ;; LaTex                                                               |
 ;;======================================================================
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(TeX-PDF-mode t t)
- '(TeX-output-view-style (quote (("^dvi$" ("^landscape$" "^pstricks$\\|^pst-\\|^psfrag$") "%(o?)dvips -t landscape %d -o && gv %f") ("^dvi$" "^pstricks$\\|^pst-\\|^psfrag$" "%(o?)dvips %d -o && gv %f") ("^dvi$" ("^\\(?:a4\\(?:dutch\\|paper\\|wide\\)\\|sem-a4\\)$" "^landscape$") "%(o?)xdvi %dS -paper a4r -s 0 %d") ("^dvi$" "^\\(?:a4\\(?:dutch\\|paper\\|wide\\)\\|sem-a4\\)$" "%(o?)xdvi %dS -paper a4 %d") ("^dvi$" ("^\\(?:a5\\(?:comb\\|paper\\)\\)$" "^landscape$") "%(o?)xdvi %dS -paper a5r -s 0 %d") ("^dvi$" "^\\(?:a5\\(?:comb\\|paper\\)\\)$" "%(o?)xdvi %dS -paper a5 %d") ("^dvi$" "^b5paper$" "%(o?)xdvi %dS -paper b5 %d") ("^dvi$" "^letterpaper$" "%(o?)xdvi %dS -paper us %d") ("^dvi$" "^legalpaper$" "%(o?)xdvi %dS -paper legal %d") ("^dvi$" "^executivepaper$" "%(o?)xdvi %dS -paper 7.25x10.5in %d") ("^dvi$" "." "%(o?)xdvi %dS %d") ("^pdf$" "." "start acrord32 %o") ("^html?$" "." "netscape %o"))))
+ '(TeX-output-view-style
+   (quote
+    (("^dvi$"
+      ("^landscape$" "^pstricks$\\|^pst-\\|^psfrag$")
+      "%(o?)dvips -t landscape %d -o && gv %f")
+     ("^dvi$" "^pstricks$\\|^pst-\\|^psfrag$" "%(o?)dvips %d -o && gv %f")
+     ("^dvi$"
+      ("^\\(?:a4\\(?:dutch\\|paper\\|wide\\)\\|sem-a4\\)$" "^landscape$")
+      "%(o?)xdvi %dS -paper a4r -s 0 %d")
+     ("^dvi$" "^\\(?:a4\\(?:dutch\\|paper\\|wide\\)\\|sem-a4\\)$" "%(o?)xdvi %dS -paper a4 %d")
+     ("^dvi$"
+      ("^\\(?:a5\\(?:comb\\|paper\\)\\)$" "^landscape$")
+      "%(o?)xdvi %dS -paper a5r -s 0 %d")
+     ("^dvi$" "^\\(?:a5\\(?:comb\\|paper\\)\\)$" "%(o?)xdvi %dS -paper a5 %d")
+     ("^dvi$" "^b5paper$" "%(o?)xdvi %dS -paper b5 %d")
+     ("^dvi$" "^letterpaper$" "%(o?)xdvi %dS -paper us %d")
+     ("^dvi$" "^legalpaper$" "%(o?)xdvi %dS -paper legal %d")
+     ("^dvi$" "^executivepaper$" "%(o?)xdvi %dS -paper 7.25x10.5in %d")
+     ("^dvi$" "." "%(o?)xdvi %dS %d")
+     ("^pdf$" "." "evince %(outpage)")
+     ("^html?$" "." "netscape %o"))))
  '(TeX-source-correlate-method (quote synctex))
  '(TeX-source-correlate-mode t)
  '(TeX-source-correlate-start-server t)
- '(TeX-view-program-list (quote (("Adobe Reader" "start acrord32 %o"))))
- '(TeX-view-program-selection (quote (((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi") (output-pdf "acrord32") (output-html "xdg-open"))))
+ '(TeX-view-program-list (quote (("Evince" "evince %o#src:%n%b"))))
+ '(TeX-view-program-selection
+   (quote
+    (((output-dvi style-pstricks)
+      "dvips and gv")
+     (output-dvi "xdvi")
+     (output-pdf "Evince")
+     (output-html "xdg-open"))))
+ '(custom-safe-themes
+   (quote
+    ("1ba61848d0d8c78e037867c26f118875705c20f5ad64949a8cee8c8059e5c50f" "418c12c6586b8d8486096364705ffaff64c7e36e8eaf6bda0b97ec4b2c82ad84" "59a76dce0286833b075306f0b94e173989bc74968c547c6e8bd2eb1b145b623e" default)))
  '(doc-view-continuous t)
- '(ecb-options-version "2.40"))
+ '(ecb-options-version "2.40")
+ '(safe-local-variable-values (quote ((TeX-master . t)))))
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  )
 
 ;;****************************************************************
@@ -72,15 +101,15 @@
 ;;****************************************************************
 
 ;; We don't need to auto-load these packages. Slower to start emacs
-;;        (require 'matlab-load) 
+;;        (require 'matlab-load) (require 'evernote-mode)
+;; 
+;; After loading path, you can load this library using M-x
+;; load-library evernote-mode
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (add-to-list 'load-path "~/.emacs/lisp/predictive")
-(add-to-list 'load-path "~/.emacs/lisp/ess-12.09")
-(add-to-list 'load-path "~/.emacs.d/darkroom-mode")
-    (require 'darkroom-mode)
-;; (add-to-list 'load-path "~/.emacs.d/matlab-emacs")
-;;    (require 'matlab-load)
+;;(add-to-list 'load-path "~/.emacs/lisp/ess-12.09")
+
 
 ;;****************************************************************
 ;;
@@ -250,7 +279,6 @@
 (setq reftex-plug-into-AUCTeX t)
 (global-set-key [(f5)] 'flyspell-mode)
 (global-set-key [(f6)] 'flyspell-buffer)
-(setq-default ispell-program-name "aspell")
 
 ;;****************************************************************
 ;;
@@ -286,35 +314,88 @@
 (setq auto-mode-alist (cons '("\\.h$" . c++-mode) auto-mode-alist))
 
 
-;; Load Emacs Stat
-;;auto-mode-alist (append (list '("\\.S$" . S-mode)
-;;                '("\\.s$" . S-mode)
-;;                '("\\.R$" . R-mode)
-;;                '("\\.r$" . R-mode)
-;;                )
-;;          auto-mode-alist)
-;;(load "/home/victorhugo/.emacs.d/ess-12.09")
-;;(setq-default inferior-S+6-program-name "Splus")
-;;(setq-default inferior-R-program-name "R")
-
-;; Define keys global map
-;;(define-key global-map [f1] 'Control-X-prefix)
-;;(define-key global-map [f3] 'find-file)
-;;(define-key global-map [f2] 'save-buffer)
-;;(define-key global-map [f8] 'kill-buffer)
-;;(define-key global-map [f5] 'switch-to-buffer)
-;;(define-key global-map [f6] 'other-window)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;              CEDET PACKAGE
+;;              Org-mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq org-log-done t)
 
-;; (load-file "~/.emacs.d/cedet-1.1/common/cedet.el")
-;; (global-ede-mode 1)                      ; Enable the Project management system
-;; (semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion 
-;; (global-srecode-minor-mode 1)            ; Enable template insertion menu
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
-;; ;; Emacs Code Navigator - ECB
-;; (add-to-list 'load-path "~/.emacs.d/emacs-code-browser/")
-;; (require 'ecb)
+;; fontify code in code blocks
+(setq org-src-fontify-natively t)
 
+;;====================================================================== 
+;; org-mode as day planner
+;; http://newartisans.com/2007/08/using-org-mode-as-a-day-planner/
+(require 'org-install)
+
+;;(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+;;
+;;(define-key mode-specific-map [?a] 'org-agenda)
+;;
+;;(eval-after-load "org"
+;;  '(progn
+;;     (define-prefix-command 'org-todo-state-map)
+;;
+;;     (define-key org-mode-map "\C-cx" 'org-todo-state-map)
+;;
+;;     (define-key org-todo-state-map "x"
+;;       #'(lambda nil (interactive) (org-todo "CANCELLED")))
+;;     (define-key org-todo-state-map "d"
+;;       #'(lambda nil (interactive) (org-todo "DONE")))
+;;     (define-key org-todo-state-map "f"
+;;       #'(lambda nil (interactive) (org-todo "DEFERRED")))
+;;     (define-key org-todo-state-map "l"
+;;       #'(lambda nil (interactive) (org-todo "DELEGATED")))
+;;     (define-key org-todo-state-map "s"
+;;       #'(lambda nil (interactive) (org-todo "STARTED")))
+;;     (define-key org-todo-state-map "w"
+;;       #'(lambda nil (interactive) (org-todo "WAITING")))
+;;
+;;     ;;(define-key org-agenda-mode-map "\C-n" 'next-line)
+;;     ;;(define-key org-agenda-keymap "\C-n" 'next-line)
+;;     ;;(define-key org-agenda-mode-map "\C-p" 'previous-line)
+;;     ;;(define-key org-agenda-keymap "\C-p" 'previous-line)))
+;;	 )
+
+(require 'remember)
+;;(require 'org-remember)
+
+(add-hook 'remember-mode-hook 'org-remember-apply-template)
+
+(define-key global-map [(control meta ?r)] 'remember)
+
+(custom-set-variables
+ '(org-agenda-files (quote ("~/Dropbox/me/org/todo.org")))
+ '(org-default-notes-file "~/Dropbox/me/org/notes.org")
+ '(org-agenda-ndays 7)
+ '(org-deadline-warning-days 14)
+ '(org-agenda-show-all-dates t)
+ '(org-agenda-skip-deadline-if-done t)
+ '(org-agenda-skip-scheduled-if-done t)
+ '(org-agenda-start-on-weekday nil)
+ '(org-reverse-note-order t)
+ '(org-fast-tag-selection-single-key (quote expert))
+ '(org-agenda-custom-commands
+   (quote (("d" todo "DELEGATED" nil)
+	   ("c" todo "DONE|DEFERRED|CANCELLED" nil)
+	   ("w" todo "WAITING" nil)
+	   ("W" agenda "" ((org-agenda-ndays 21)))
+	   ("A" agenda ""
+	    ((org-agenda-skip-function
+	      (lambda nil
+		(org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]")))
+	     (org-agenda-ndays 1)
+	     (org-agenda-overriding-header "Today's Priority #A tasks: ")))
+	   ("u" alltodo ""
+	    ((org-agenda-skip-function
+	      (lambda nil
+		(org-agenda-skip-entry-if (quote scheduled) (quote deadline)
+					  (quote regexp) "\n]+>")))
+	     (org-agenda-overriding-header "Unscheduled TODO entries: "))))))
+ '(org-remember-store-without-prompt t)
+ '(org-remember-templates
+   (quote ((116 "* TODO %?\n  %u" "~/todo.org" "Tasks")
+	   (110 "* %u %?" "~/notes.org" "Notes"))))
+ '(remember-annotation-functions (quote (org-remember-annotation)))
+ '(remember-handler-functions (quote (org-remember-handler))))
