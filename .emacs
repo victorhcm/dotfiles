@@ -15,18 +15,20 @@
 ;;======================================================================
 ;;                              Victor Hugo                            |
 ;;======================================================================
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 
 ;; para evitar aquela confirmação que o emacs fica esperando ao
 ;; carregar arquivos abertos anteriormente
 ;; Didn't work
 (defadvice desktop-restore-file-buffer
-  (around my-desktop-restore-file-buffer-advice)
-  "Be non-interactive while starting a daemon."
-  (if (and (daemonp)
-           (not server-process))
-      (let ((noninteractive t))
-        ad-do-it)
-    ad-do-it))
+(around my-desktop-restore-file-buffer-advice)
+"Be non-interactive while starting a daemon."
+(if (and (daemonp)
+	  (not server-process))
+    (let ((noninteractive t))
+      ad-do-it)
+  ad-do-it))
 (ad-activate 'desktop-restore-file-buffer)
 
 
@@ -48,7 +50,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(TeX-PDF-mode t t)
+ '(TeX-PDF-mode t)
  '(TeX-output-view-style
    (quote
     (("^dvi$"
@@ -83,9 +85,61 @@
      (output-html "xdg-open"))))
  '(custom-safe-themes
    (quote
-    ("1ba61848d0d8c78e037867c26f118875705c20f5ad64949a8cee8c8059e5c50f" "418c12c6586b8d8486096364705ffaff64c7e36e8eaf6bda0b97ec4b2c82ad84" "59a76dce0286833b075306f0b94e173989bc74968c547c6e8bd2eb1b145b623e" default)))
+    ("70403e220d6d7100bae7775b3334eddeb340ba9c37f4b39c189c2c29d458543b" "1ba61848d0d8c78e037867c26f118875705c20f5ad64949a8cee8c8059e5c50f" "418c12c6586b8d8486096364705ffaff64c7e36e8eaf6bda0b97ec4b2c82ad84" "59a76dce0286833b075306f0b94e173989bc74968c547c6e8bd2eb1b145b623e" default)))
  '(doc-view-continuous t)
  '(ecb-options-version "2.40")
+ '(org-agenda-custom-commands
+   (quote
+    (("d" todo "DELEGATED" nil)
+     ("c" todo "DONE|DEFERRED|CANCELLED" nil)
+     ("w" todo "WAITING" nil)
+     ("W" agenda ""
+      ((org-agenda-ndays 21)))
+     ("A" agenda ""
+      ((org-agenda-skip-function
+	(lambda nil
+	  (org-agenda-skip-entry-if
+	   (quote notregexp)
+	   "\\=.*\\[#A\\]")))
+       (org-agenda-ndays 1)
+       (org-agenda-overriding-header "Today's Priority #A tasks: ")))
+     ("u" alltodo ""
+      ((org-agenda-skip-function
+	(lambda nil
+	  (org-agenda-skip-entry-if
+	   (quote scheduled)
+	   (quote deadline)
+	   (quote regexp)
+	   "
+]+>")))
+       (org-agenda-overriding-header "Unscheduled TODO entries: "))))))
+ '(org-agenda-files (quote ("~/Dropbox/me/org/todo.org")))
+ '(org-agenda-ndays 7)
+ '(org-agenda-show-all-dates t)
+ '(org-agenda-skip-deadline-if-done t)
+ '(org-agenda-skip-scheduled-if-done t)
+ '(org-agenda-start-on-weekday nil)
+ '(org-capture-templates
+   (quote
+    (("t" "Add new TODO task in todo.org" entry
+      (file+headline "~/Dropbox/me/org/todo.org" "Tasks")
+      "* TODO %? 
+  %u")
+     ("n" "File notes in notes.org" entry
+      (file "~/Dropbox/me/org/notes.org")
+      "* %u %?"))))
+ '(org-deadline-warning-days 14)
+ '(org-default-notes-file "~/Dropbox/me/org/notes.org")
+ '(org-fast-tag-selection-single-key (quote expert))
+ ;;'(org-remember-store-without-prompt t)
+ ;;'(org-remember-templates
+ ;;  (quote
+ ;;   ((116 "* TODO %?
+ ;; %u" "~/todo.org" "Tasks")
+ ;;    (110 "* %u %?" "~/notes.org" "Notes"))))
+ '(org-reverse-note-order t)
+ ;;'(remember-annotation-functions (quote (org-remember-annotation)))
+ ;;'(remember-handler-functions (quote (org-remember-handler)))
  '(safe-local-variable-values (quote ((TeX-master . t)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -122,10 +176,10 @@
 ;;   (interactive)
 ;;   (let ((current-value (frame-parameter nil 'fullscreen)))
 ;;     (set-frame-parameter nil 'fullscreen
-;;           (if (equal 'fullboth current-value)
-;;               (if (boundp 'old-fullscreen) old-fullscreen nil)
-;;             (progn (setq old-fullscreen current-value)
-;;                'fullboth)))))
+;; 			 (if (equal 'fullboth current-value)
+;; 			     (if (boundp 'old-fullscreen) old-fullscreen nil)
+;; 			   (progn (setq old-fullscreen current-value)
+;; 				  'fullboth)))))
 ;; (global-set-key [f8] 'toggle-fullscreen)
 ;; (run-with-idle-timer 0.1 nil 'toggle-fullscreen)
 
@@ -160,8 +214,8 @@
 
 ;; Configure dark color theme
 ;; (add-to-list 'load-path "~/.emacs.d/color-theme-5.6.0")
-;; (add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/themes")
-;; (require 'color-theme)
+;;(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/themes")
+;;(require 'color-theme)
 ;; (color-theme-initialize)
 ;; (color-theme-dark-laptop)
 
@@ -195,19 +249,19 @@
 ;; Save a bunch of variables to the desktop file
 ;;
 (setq desktop-globals-to-save
-      (append '((extended-command-history . 30)
-                (file-name-history        . 100)
-                (grep-history             . 30)
-                (compile-history          . 30)
-                (minibuffer-history       . 50)
-                (query-replace-history    . 60)
-                (read-expression-history  . 60)
-                (regexp-history           . 60)
-                (regexp-search-ring       . 20)
-                (search-ring              . 20)
-                (shell-command-history    . 50)
-                tags-file-name
-                register-alist)))
+    (append '((extended-command-history . 30)
+	      (file-name-history        . 100)
+	      (grep-history             . 30)
+	      (compile-history          . 30)
+	      (minibuffer-history       . 50)
+	      (query-replace-history    . 60)
+	      (read-expression-history  . 60)
+	      (regexp-history           . 60)
+	      (regexp-search-ring       . 20)
+	      (search-ring              . 20)
+	      (shell-command-history    . 50)
+	      tags-file-name
+	      register-alist)))
 
 
 ;; Use F11 to invoke ibuffer
@@ -296,10 +350,10 @@
 
 ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph    
 (defun unfill-paragraph ()
-  "Takes a multi-line paragraph and makes it into a single line of text."
-  (interactive)
-  (let ((fill-column (point-max)))
-    (fill-paragraph nil)))
+"Takes a multi-line paragraph and makes it into a single line of text."
+(interactive)
+(let ((fill-column (point-max)))
+  (fill-paragraph nil)))
 ;; Handy key definition
 (define-key global-map "\M-Q" 'unfill-paragraph)
 
@@ -317,6 +371,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;              Org-mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'org)
+
 (setq org-log-done t)
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
@@ -327,11 +383,10 @@
 ;;====================================================================== 
 ;; org-mode as day planner
 ;; http://newartisans.com/2007/08/using-org-mode-as-a-day-planner/
-(require 'org-install)
 
-;;(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-;;
-;;(define-key mode-specific-map [?a] 'org-agenda)
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+
+(define-key mode-specific-map [?a] 'org-agenda)
 ;;
 ;;(eval-after-load "org"
 ;;  '(progn
@@ -358,44 +413,6 @@
 ;;     ;;(define-key org-agenda-keymap "\C-p" 'previous-line)))
 ;;	 )
 
-(require 'remember)
-;;(require 'org-remember)
+(define-key global-map "\C-cc" 'org-capture)
 
-(add-hook 'remember-mode-hook 'org-remember-apply-template)
-
-(define-key global-map [(control meta ?r)] 'remember)
-
-(custom-set-variables
- '(org-agenda-files (quote ("~/Dropbox/me/org/todo.org")))
- '(org-default-notes-file "~/Dropbox/me/org/notes.org")
- '(org-agenda-ndays 7)
- '(org-deadline-warning-days 14)
- '(org-agenda-show-all-dates t)
- '(org-agenda-skip-deadline-if-done t)
- '(org-agenda-skip-scheduled-if-done t)
- '(org-agenda-start-on-weekday nil)
- '(org-reverse-note-order t)
- '(org-fast-tag-selection-single-key (quote expert))
- '(org-agenda-custom-commands
-   (quote (("d" todo "DELEGATED" nil)
-	   ("c" todo "DONE|DEFERRED|CANCELLED" nil)
-	   ("w" todo "WAITING" nil)
-	   ("W" agenda "" ((org-agenda-ndays 21)))
-	   ("A" agenda ""
-	    ((org-agenda-skip-function
-	      (lambda nil
-		(org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]")))
-	     (org-agenda-ndays 1)
-	     (org-agenda-overriding-header "Today's Priority #A tasks: ")))
-	   ("u" alltodo ""
-	    ((org-agenda-skip-function
-	      (lambda nil
-		(org-agenda-skip-entry-if (quote scheduled) (quote deadline)
-					  (quote regexp) "\n]+>")))
-	     (org-agenda-overriding-header "Unscheduled TODO entries: "))))))
- '(org-remember-store-without-prompt t)
- '(org-remember-templates
-   (quote ((116 "* TODO %?\n  %u" "~/todo.org" "Tasks")
-	   (110 "* %u %?" "~/notes.org" "Notes"))))
- '(remember-annotation-functions (quote (org-remember-annotation)))
- '(remember-handler-functions (quote (org-remember-handler))))
+;; TODO replace references to remember mode for org-capture
