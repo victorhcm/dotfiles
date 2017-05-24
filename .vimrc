@@ -11,12 +11,12 @@ filetype off     " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
   Plugin 'VundleVim/Vundle.vim'    " required!
-  Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+  "Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
   "Plugin 'vim-airline/vim-airline'  "alternative completely in vimscript for powerline
   Plugin 'airblade/vim-gitgutter'
-  Plugin 'scrooloose/syntastic'
-  Plugin 'scrooloose/nerdtree'
-  Plugin 'jistr/vim-nerdtree-tabs'
+  "Plugin 'scrooloose/syntastic'
+  "Plugin 'scrooloose/nerdtree'
+  "Plugin 'jistr/vim-nerdtree-tabs'
   "Plugin 'Valloric/YouCompleteMe'
   Plugin 'ctrlpvim/ctrlp.vim'
   Plugin 'klen/python-mode'        " great extension
@@ -28,6 +28,7 @@ call vundle#begin()
   Plugin 'tpope/vim-sleuth'        " automatically adjusts 'shiftwidth' and 'expandtab' based on current file
   Plugin 'flazz/vim-colorschemes'  " the name says it all
   Plugin 'tpope/vim-surround'      " change surrounding cs'<q>
+  Plugin 'tpope/vim-vinegar'       " file explorer stuff
   Plugin 'Raimondi/delimitMate'    " same autoclose, but without auto-pairs issue
   "Plugin 'jiangmiao/auto-pairs'   " autocloses brackets etc.
   "Plugin 'sjl/gundo.vim'          " visualize the undo tree
@@ -117,7 +118,8 @@ cnoremap <C-g>  <C-c>
 " http://www.mybridge.co/view/10709
 "======================================================================
 set foldmethod=indent
-set foldlevel=99
+set foldlevel=0 "previous: 99
+set foldcolumn=1
 
 set showmatch      " Show matching brackets.
 set mouse=a        " Enable mouse usage (all modes)
@@ -133,9 +135,9 @@ let g:Powerline_symbols = 'fancy'
 
 
 " syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 2
@@ -165,7 +167,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " pymode: disable window showing lint errors
 let g:pymode_lint_cwindow = 0
-"let g:pymode_rope = 0  " disable for large repos, such as caffe
+let g:pymode_rope = 0  " disable for large repos, such as caffe
 
 
 " color theme
