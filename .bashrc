@@ -2,6 +2,13 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# Please do not remove the following line.  This file sets up your
+# environment the way it is supposed to be.  You can add your own
+# features if you know what you are doing.
+#
+[ -f /.bashrc_global ] && source /.bashrc_global
+[ -z "$PS1" ] && return
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -112,5 +119,69 @@ PROMPT_COMMAND='history -a'
 # when you type: $ cd /vr/lgo/apaAche, it corrects to /var/log/apache. Awesome! ;-)
 shopt -s cdspell
 
+# my bookmarked dirs separated by `:'
+#CDPATH='.:..:../..:~/Dropbox:~'
 
+# export my favorite editor --- and a gambis to turn emacs faster
+#EDITOR="emacsclient -a "" -nw"
+#export EDITOR
 
+# macete para iniciar emacs --daemon de uma vez
+#export ALTERNATE_EDITOR=""
+#alias e='emacsclient -t'
+
+# alias emacs='emacs -nw'
+function emacs
+{
+    TERM=xterm
+    command emacs -nw "$@"
+}
+
+# open some graphical commands in background
+function gimp
+{
+    command gimp "$@" &
+}
+
+# open some graphical commands in background
+function gedit
+{
+    command gedit "$@" &
+}
+
+# Para o vi/vim usar as cores do powerline corretamente
+# export TERM=xterm-256color
+function tmux
+{
+    #TERM=xterm-256color
+    #TERM=screen-256color-bce
+    TERM=screen-256color
+    command tmux "$@"
+}
+
+# opening nautilus in background
+function nautilus
+{
+    command nautilus "$@" &
+}
+
+# function sublime
+# {
+#     command ~/bin/Sublime\ Text\ 2/sublime "$@" &
+# }
+
+# anaconda path
+# should be in ~/.profile, but I couldn't get this working
+export PATH=$HOME/workspace/anaconda2/bin:$PATH
+
+# go path
+export GOPATH=$HOME/workspace/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+# # solves issue with colors in vim when using tmux
+# export TERM=screen-256color
+
+powerline-daemon -q
+POWERLINE_BASH_CONTINUATION=1
+POWERLINE_BASH_SELECT=1
+. $HOME/workspace/anaconda2/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
