@@ -95,6 +95,14 @@ endif
 nmap j gj
 nmap k gk
 
+" j and k don't skip over wrapped lines in following FileTypes, unless given a
+" count (helpful since I display relative line numbers in these file types)
+" (https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/cliuz1o)
+autocmd FileType markdown,python,vim,text nnoremap <expr> j v:count ? 'j' : 'gj'
+autocmd FileType markdown,python,vim,text nnoremap <expr> k v:count ? 'k' : 'gk'
+autocmd FileType markdown,python,vim,text vnoremap <expr> j v:count ? 'j' : 'gj'
+autocmd FileType markdown,python,vim,text vnoremap <expr> k v:count ? 'k' : 'gk'
+
 set incsearch
 set ignorecase
 set smartcase
