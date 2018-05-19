@@ -36,7 +36,7 @@ call vundle#begin()
   Plugin 'tpope/vim-repeat'        " repeats more stuff with .
   "Plugin 'tpope/vim-obsession'    " better session manager
   Plugin 'tiagofumo/vim-nerdtree-syntax-highlight' " icon colors
-  Plugin 'jeaye/color_coded'
+  "Plugin 'jeaye/color_coded'
 call vundle#end()
 "most new plugins came from https://github.com/VundleVim/Vundle.vim
 " source: https://github.com/mhartington/dotfiles/blob/master/vimrc
