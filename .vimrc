@@ -126,7 +126,7 @@ cnoremap <C-g>  <C-c>
 " http://www.mybridge.co/view/10709
 "======================================================================
 set foldmethod=indent
-set foldlevel=0 "previous: 99
+set foldlevel=99 "previous: 0
 set foldcolumn=1
 
 set showmatch      " Show matching brackets.
