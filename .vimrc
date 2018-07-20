@@ -18,13 +18,13 @@ call vundle#begin()
   "Plugin 'scrooloose/nerdtree'
   "Plugin 'jistr/vim-nerdtree-tabs'
   "Plugin 'Valloric/YouCompleteMe'
-  Plugin 'ctrlpvim/ctrlp.vim'
-  Plugin 'klen/python-mode'        " great extension
-  Plugin 'elzr/vim-json'           " better json
+  "Plugin 'ctrlpvim/ctrlp.vim'
+  "Plugin 'klen/python-mode'        " great extension
+  "Plugin 'elzr/vim-json'           " better json
   "Plugin 'justinmk/vim-sneak'     " extended f. use s<char><char>
-  Plugin 'majutsushi/tagbar'       " show tagbar :TagbarToggle
-  Plugin 'godlygeek/tabular'       " aligning text
-  Plugin 'plasticboy/vim-markdown' " must come after tabular
+  "Plugin 'majutsushi/tagbar'       " show tagbar :TagbarToggle
+  "Plugin 'godlygeek/tabular'       " aligning text
+  "Plugin 'plasticboy/vim-markdown' " must come after tabular
   Plugin 'tpope/vim-sleuth'        " automatically adjusts 'shiftwidth' and 'expandtab' based on current file
   Plugin 'flazz/vim-colorschemes'  " the name says it all
   Plugin 'tpope/vim-surround'      " change surrounding cs'<q>
@@ -32,10 +32,10 @@ call vundle#begin()
   Plugin 'Raimondi/delimitMate'    " same autoclose, but without auto-pairs issue
   "Plugin 'jiangmiao/auto-pairs'   " autocloses brackets etc.
   "Plugin 'sjl/gundo.vim'          " visualize the undo tree
-  Plugin 'ryanoasis/vim-devicons'  " icons on NERDTree etc.
+  "Plugin 'ryanoasis/vim-devicons'  " icons on NERDTree etc.
   Plugin 'tpope/vim-repeat'        " repeats more stuff with .
   "Plugin 'tpope/vim-obsession'    " better session manager
-  Plugin 'tiagofumo/vim-nerdtree-syntax-highlight' " icon colors
+  "Plugin 'tiagofumo/vim-nerdtree-syntax-highlight' " icon colors
   "Plugin 'jeaye/color_coded'
 call vundle#end()
 "most new plugins came from https://github.com/VundleVim/Vundle.vim
