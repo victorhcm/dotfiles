@@ -170,18 +170,12 @@ function nautilus
 #     command ~/bin/Sublime\ Text\ 2/sublime "$@" &
 # }
 
-# anaconda path
-# should be in ~/.profile, but I couldn't get this working
-export PATH=$HOME/workspace/anaconda2/bin:$PATH
+# solves issue with colors in vim when using tmux
+export TERM=screen-256color
+export VISUAL=vim
+export EDITOR="$VISUAL"
 
-# go path
-export GOPATH=$HOME/workspace/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-
-# # solves issue with colors in vim when using tmux
-# export TERM=screen-256color
-
-powerline-daemon -q
-POWERLINE_BASH_CONTINUATION=1
-POWERLINE_BASH_SELECT=1
-. $HOME/workspace/anaconda2/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+# powerline-daemon -q
+# POWERLINE_BASH_CONTINUATION=1
+# POWERLINE_BASH_SELECT=1
+# . $HOME/workspace/anaconda2/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
