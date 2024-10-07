@@ -1,12 +1,5 @@
 [core]
   editor = vim
-[color]
-  # from kaixhin
-  ui = auto
-  branch = auto
-  diff = auto
-  status = auto
-  pager = true
 [alias]
   # kaixhin
   sts = status -s
